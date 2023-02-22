@@ -15,18 +15,26 @@ class ClientThread(threading.Thread): #Définition de notre class, celle-ci corr
 
         print("Connexion de %s %s" % (self.ip, self.port, ))
 
-        r = self.clientsocket.recv(2048) # On récupère la date qui nous a été envoyé
-        r = r.decode("utf8") # On décode la data qui a été encodé juste avant son envoi
-        print(r)
+        while True:
 
-        # Data que nous allons envoyé au client
+            r = self.clientsocket.recv(2048) # On récupère la date qui nous a été envoyé
+            r = r.decode("utf8") # On décode la data qui a été encodé juste avant son envoi
+            print(r)
 
-        print("Que voulez-vous envoyer au client ", self.ip, self.port, " ?")
-        data =  input(">> ")
-        data = data.encode("utf8") # On encode la data avant son envoi
-        self.clientsocket.sendall(data) # On envoie la date au client correspondant
+            if r == "break":
+                print("Client déconnecté...")
+                data =  "break"
+                data = data.encode("utf8") # On encode la data avant son envoi
+                self.clientsocket.sendall(data) # On envoie la date au client correspondant
+                break
 
-        print("Client déconnecté...")
+            # Data que nous allons envoyé au client
+
+            print("Que voulez-vous envoyer au client ", self.ip, self.port, " ?")
+            data =  input(">> ")
+            data = data.encode("utf8") # On encode la data avant son envoi
+            self.clientsocket.sendall(data) # On envoie la date au client correspondant
+
 
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
