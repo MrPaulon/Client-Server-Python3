@@ -40,9 +40,9 @@ tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 tcpsock.bind(("127.0.0.1",12086)) # On définit l'adresse ip et le port de notre serveur
 
-while True: # Cette boucle attends la connextion des clients et les créée selon la class définit plus haut
+while True: # Cette boucle attends la connexion des clients et les créée selon la class définit plus haut
     tcpsock.listen(10)
     print( "En écoute...")
     (clientsocket, (ip, port)) = tcpsock.accept()
-    newthread = ClientThread(ip, port, clientsocket) # Création d'un thrad réservé au client
+    newthread = ClientThread(ip, port, clientsocket) # Création d'un thread réservé au client
     newthread.start()
