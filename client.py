@@ -12,9 +12,9 @@ while True:
 
     # Le Serveur renvoit quelque chose
 
-    data2 =''
-    data2 = s.recv(1024)
-    data2 = data2.decode("utf8") #On le decode car encodé coté serveur avant l'envoi
-    if data2 == "break":
+    dataServeur =''
+    dataServeur = s.recv(1024)
+    dataServeur = dataServeur.decode("utf8") #On le decode car encodé coté serveur avant l'envoi
+    if dataServeur == "break":
         break
-    print(data2) # On affiche le contenu de ce que nous avons reçu
+    print(dataServeur) # On affiche le contenu de ce que nous avons reçu

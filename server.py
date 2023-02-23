@@ -17,11 +17,11 @@ class ClientThread(threading.Thread): #Définition de notre class, celle-ci corr
 
         while True:
 
-            r = self.clientsocket.recv(2048) # On récupère la date qui nous a été envoyé
-            r = r.decode("utf8") # On décode la data qui a été encodé juste avant son envoi
-            print(r)
+            dataClient = self.clientsocket.recv(2048) # On récupère la date qui nous a été envoyé
+            dataClient = dataClient.decode("utf8") # On décode la data qui a été encodé juste avant son envoi
+            print(dataClient)
 
-            if r == "break":
+            if dataClient == "break":
                 print("Client déconnecté...")
                 data =  "break"
                 data = data.encode("utf8") # On encode la data avant son envoi
