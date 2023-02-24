@@ -25,7 +25,7 @@ class ClientThread(threading.Thread): #Définition de notre class, celle-ci corr
                 print("Client déconnecté...")
                 data =  "break"
                 data = data.encode("utf8") # On encode la data avant son envoi
-                self.clientsocket.sendall(data) # On envoie la date au client correspondant
+                self.clientsocket.sendall(data) # On envoie la data au client correspondant
                 break
 
             # Data que nous allons envoyé au client
