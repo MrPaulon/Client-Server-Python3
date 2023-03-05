@@ -1,5 +1,19 @@
+#coding: utf-8
+
 import socket
 import threading
+import json
+
+
+# Récupération des informations sur le serveur stocké dans le .json (Ip et le Port)
+with open('settings.json') as fichier:
+    settings = json.load(fichier)
+
+
+###############################################
+##                 SERVEUR                   ##
+###############################################
+
 
 class ClientThread(threading.Thread): #Définition de notre class, celle-ci correspondra à chaque client
 
@@ -38,7 +52,7 @@ class ClientThread(threading.Thread): #Définition de notre class, celle-ci corr
 
 tcpsock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcpsock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-tcpsock.bind(("127.0.0.1",12086)) # On définit l'adresse ip et le port de notre serveur
+tcpsock.bind((settings["ip"],settings["port"])) # On définit l'adresse ip et le port de notre serveur
 
 while True: # Cette boucle attends la connexion des clients et les créée selon la class définit plus haut
     tcpsock.listen(10)
